@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@mathly-nx/api-core-auth": ["libs/api/core/auth/src/index.ts"],
+      "@mathly-nx/api-features-user": ["libs/api/features/user/src/index.ts"],
+      "@mathly-nx/features-user": ["libs/client/features/user/src/index.ts"],
+      "@mathly-nx/types": ["libs/shared/types/src/index.ts"],
+      "@mathly-nx/ui": ["libs/client/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

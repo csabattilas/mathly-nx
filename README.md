@@ -1,59 +1,167 @@
-# MathlyNx
+# Mathly
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Overview
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Mathly is a modern web application built with Angular and NestJS, leveraging the Nx monorepo structure. This repository contains the new implementation of Mathly with a focus on scalability, maintainability, and developer experience.
 
-## Finish your CI setup
+### Key Technologies
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/baAyXY5CfN)
+- **Frontend**: Angular with modern patterns
+- **Backend**: NestJS with Prisma ORM
+- **Authentication**: Firebase Authentication
+- **Database**: PostgreSQL (via Neon)
+- **Monorepo**: Nx workspace for efficient code organization and sharing
+
+## Project Structure
+
+```
+├── apps/
+│   ├── api/               # NestJS backend application
+│   ├── mathly/            # Angular frontend application
+│   └── mathly-e2e/        # End-to-end tests
+└── libs/
+    ├── api/               # Backend libraries
+    │   ├── core/          # Core backend modules (auth, etc.)
+    │   └── features/      # Feature modules for the API
+    ├── client/            # Frontend libraries
+    │   ├── features/      # Feature modules for the frontend
+    │   └── ui/            # Shared UI components
+    └── shared/            # Shared libraries
+        └── types/         # TypeScript types shared across frontend and backend
+```
 
 
-## Run tasks
+## Development
 
-To run the dev server for your app, use:
+### Prerequisites
+
+- Node.js (v18+)
+- pnpm
+- PostgreSQL database (or use the provided Neon database)
+
+### Environment Setup
+
+Create a `.env` file in the `apps/api` directory with the following variables:
+
+```
+# Database connection
+DATABASE_URL="your-postgresql-connection-string"
+
+# Server configuration
+PORT=3000
+NODE_ENV=development
+
+# Firebase Configuration
+FIREBASE_PROJECT_ID="your-firebase-project-id"
+FIREBASE_CLIENT_EMAIL="your-firebase-client-email"
+FIREBASE_PRIVATE_KEY="your-firebase-private-key"
+```
+
+### Running the Applications
+
+#### Start the API (NestJS Backend)
+
+```sh
+npx nx serve api
+```
+
+The API will be available at http://localhost:3000/api with Swagger documentation at http://localhost:3000/api/docs
+
+#### Start the Frontend (Angular)
 
 ```sh
 npx nx serve mathly
 ```
 
-To create a production bundle:
+The frontend will be available at http://localhost:4200
+
+### Building for Production
 
 ```sh
+# Build the API
+npx nx build api
+
+# Build the frontend
 npx nx build mathly
 ```
 
-To see all available targets to run for a project, run:
+### Database Management
 
 ```sh
-npx nx show project mathly
+# Generate Prisma client after schema changes
+cd apps/api && npx prisma generate
+
+# Create migrations
+cd apps/api && npx prisma migrate dev --name your-migration-name
+
+# Apply migrations
+cd apps/api && npx prisma migrate deploy
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## Project Commands
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
+To see all available targets for a project, run:
 
 ```sh
-npx nx g @nx/angular:app demo
+npx nx show project [project-name]
 ```
 
-To generate a new library, use:
+To visualize the project dependencies:
 
 ```sh
-npx nx g @nx/angular:lib mylib
+npx nx graph
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+## Adding New Features
+
+This project uses Nx to manage the monorepo structure. Here are some common commands for adding new features:
+
+### Backend (NestJS)
+
+```sh
+# Create a new API feature library
+npx nx g @nx/nest:lib feature-name --directory=libs/api/features/feature-name --tags=scope:api,type:feature
+
+# Generate a new resource (controller, service, module with CRUD)
+npx nx g @nestjs/schematics:resource --name=resource-name --source-root=libs/api/features/feature-name/src --no-spec
+```
+
+### Frontend (Angular)
+
+```sh
+# Create a new frontend feature library
+npx nx g @nx/angular:lib feature-name --directory=libs/client/features/feature-name --tags=scope:client,type:feature
+
+# Generate a new component
+npx nx g @nx/angular:component component-name --project=client-features-feature-name
+```
+
+### Shared Libraries
+
+```sh
+# Create a new shared TypeScript library
+npx nx g @nx/js:lib lib-name --directory=libs/shared/lib-name --tags=scope:shared,type:util
+```
+
+### Useful Nx Commands
+
+```sh
+# List available plugins
+npx nx list
+
+# View capabilities of a plugin
+npx nx list @nx/nest
+
+# Run a specific target for all projects
+npx nx run-many --target=lint --all
+
+# Run a specific target for projects affected by changes
+npx nx affected --target=test
+```
+
+For more information, check out the [Nx documentation](https://nx.dev/) or install the [Nx Console](https://nx.dev/getting-started/editor-setup) extension for your IDE.
 
 [Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
