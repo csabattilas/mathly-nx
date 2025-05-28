@@ -1,0 +1,9 @@
+{
+  "name": "mathly-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/mathly-e2e/src",
+  "implicitDependencies": ["mathly"],
+  "// targets": "to see all targets run: nx show project mathly-e2e --web",
+  "targets": {}
+}
