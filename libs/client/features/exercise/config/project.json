@@ -1,0 +1,9 @@
+{
+  "name": "exercise-config",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/features/exercise/config/src",
+  "projectType": "library",
+  "tags": ["scope:client", "type:feature"],
+  "// targets": "to see all targets run: nx show project exercise-config --web",
+  "targets": {}
+}

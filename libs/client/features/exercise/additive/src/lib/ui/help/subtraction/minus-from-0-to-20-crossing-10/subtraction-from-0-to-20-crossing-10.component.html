@@ -1,0 +1,109 @@
+<div class="bg-white">
+  <h2>Let's solve this together</h2>
+  {{this.exerciseString}}
+  <p>Because the excess over ten ({{excessTen}}) is smaller than the subtrahend ({{subtrahend}}) this subtraction is a bit harder to execute</p>
+  <p>But there is a trick. If the excess over ten is small then the subtrahend, it means that the result will be smaller than 10.</p>
+  <p>Our job is find out how much smaller. So instead of directly solving this problem. We will solve two easier problems:</p>
+  <ul>
+    <li>Find out how much we have to subtract from 10</li>
+    <li>Execute the subtraction from 10</li>
+  </ul>
+  <h3>Find out how much to subtract from 10</h3>
+  <p>Easy divide the subtrahend as follows. One part will be the excess over ten excessTen {{excessTen}}, the other part will be subtrahend {{subtrahend}} minus the excess over ten</p>
+  <p>Let's see that on the counting line</p>
+  @if(exerciseSubtrahendMinExcess) {
+  <mathly-ui-integer-solution-type-in-renderer-renderer-renderer
+    [exercise]="exerciseSubtrahendMinExcess"
+    ></mathly-ui-integer-solution-type-in-renderer-renderer-renderer>
+  }
+  <svg
+    width="100%" height="400" [attr.viewBox]="'0 0 ' + ((minuend + 1) * steps + 10) + ' 100'"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <!-- Draw the number line -->
+    <line x1="5" y1="50" [attr.x2]="(minuend + 1)  * steps + 5" y2="50" stroke="black" stroke-width="2"/>
+
+    <!-- Ticks and numbers -->
+    <g font-size="10" text-anchor="middle" style="fill:black;">
+      <ng-container *ngFor="let number of numberLineSubtrahend; let i = index">
+        <line [attr.x1]="i * steps + 5" y1="45" [attr.x2]="i * steps + 5" y2="55" stroke="black"/>
+        <text [attr.x]="i * steps + 5" y="40">{{ number }}</text>
+      </ng-container>
+    </g>
+
+    <path
+      #greenArc
+      [attr.d]="'M ' + ( minuend * steps + 5 )+ ' 50 A ' + curveHeight + ' ' + curveHeight + ' 0 0 0 ' + (excessTen * steps + 12) + ' 44'"
+      fill="transparent"
+      stroke="green"
+      stroke-width="2"
+      stroke-dashoffset="0"
+      marker-end="url(#arrowhead-green)"
+    />
+
+    <!-- Arrowheads definition -->
+    <defs>
+      <marker id="arrowhead-green" #greenArcArrow markerWidth="4" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 5 3.5, 0 7" fill="green"/>
+      </marker>
+    </defs>
+  </svg>
+<!--  <svg width="100%"height="auto" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">-->
+<!--    &lt;!&ndash; Draw the number line &ndash;&gt;-->
+<!--    <line x1="10" y1="50" x2="590" y2="50" stroke="black" stroke-width="2"/>-->
+
+<!--    &lt;!&ndash; Ticks and numbers &ndash;&gt;-->
+<!--    <g font-size="10" text-anchor="middle" style="fill:black;">-->
+<!--      <ng-container *ngFor="let number of numberLine; let i = index">-->
+<!--        <line [attr.x1]="10 + i * (580 / 20)" [attr.y1]="45" [attr.x2]="10 + i * (580 / 20)" [attr.y2]="55" stroke="black"/>-->
+<!--        <text [attr.x]="10 + i * (580 / 20)" y="40">{{ number }}</text>-->
+<!--      </ng-container>-->
+<!--    </g>-->
+
+<!--    &lt;!&ndash; Dynamic Arcs based on endPoint &ndash;&gt;-->
+<!--    <path [attr.d]="'M ' + (10 + from * (580 / 20)) + ' 50 A 180 180 0 0 0 ' + (10 + this.backJumpEnd * (580 / 20)) + ' 50'"-->
+<!--          fill="transparent" stroke="green" stroke-width="2" marker-end="url(#arrowhead-green)"/>-->
+
+<!--    &lt;!&ndash; Arrowheads definition &ndash;&gt;-->
+<!--    <defs>-->
+<!--      <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">-->
+<!--        <polygon points="0 0, 10 3.5, 0 7" fill="green"/>-->
+<!--      </marker>-->
+<!--    </defs>-->
+<!--  </svg>-->
+
+<!--  <svg-->
+<!--    width="100%" height="400" [attr.viewBox]="'0 0 ' + ((minuend + 1) * steps + 10) + ' 100'"-->
+<!--    xmlns="http://www.w3.org/2000/svg"-->
+<!--    preserveAspectRatio="xMidYMid meet"-->
+<!--  >-->
+<!--    &lt;!&ndash; Draw the number line &ndash;&gt;-->
+<!--    <line x1="5" y1="50" [attr.x2]="(minuend + 1)  * steps + 5" y2="50" stroke="black" stroke-width="2"/>-->
+
+<!--    &lt;!&ndash; Ticks and numbers &ndash;&gt;-->
+<!--    <g font-size="10" text-anchor="middle" style="fill:black;">-->
+<!--      <ng-container *ngFor="let number of numberLineSubtrahend; let i = index">-->
+<!--        <line [attr.x1]="i * steps + 5" y1="45" [attr.x2]="i * steps + 5" y2="55" stroke="black"/>-->
+<!--        <text [attr.x]="i * steps + 5" y="40">{{ number }}</text>-->
+<!--      </ng-container>-->
+<!--    </g>-->
+
+<!--    <path-->
+<!--      #greenArc-->
+<!--      [attr.d]="'M ' + ( minuend * steps + 5 )+ ' 50 A ' + curveHeight + ' ' + curveHeight + ' 0 0 0 ' + (backJumpEnd * steps + 12) + ' 44'"-->
+<!--      fill="transparent"-->
+<!--      stroke="green"-->
+<!--      stroke-width="2"-->
+<!--      stroke-dashoffset="0"-->
+<!--      marker-end="url(#arrowhead-green)"-->
+<!--    />-->
+
+<!--    &lt;!&ndash; Arrowheads definition &ndash;&gt;-->
+<!--    <defs>-->
+<!--      <marker id="arrowhead-green" #greenArcArrow markerWidth="4" markerHeight="7" refX="0" refY="3.5" orient="auto">-->
+<!--        <polygon points="0 0, 5 3.5, 0 7" fill="green"/>-->
+<!--      </marker>-->
+<!--    </defs>-->
+<!--  </svg>-->
+</div>

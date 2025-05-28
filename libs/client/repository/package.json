@@ -1,0 +1,13 @@
+{
+  "name": "@mathly-nx/repository",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "dependencies": {
+    "@angular/core": "~19.2.0",
+    "@mathly-nx/dto": "0.0.1",
+    "rxjs": "~7.8.0"
+  }
+}

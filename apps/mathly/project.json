@@ -6,6 +6,38 @@
   "sourceRoot": "apps/mathly/src",
   "tags": [],
   "targets": {
+    "build-client": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/mathly-client",
+        "index": "apps/mathly/src/index.html",
+        "browser": "apps/mathly/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/mathly/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/mathly/public"
+          }
+        ],
+        "styles": ["apps/mathly/src/styles.scss"],
+        "scripts": [],
+        "outputMode": "static"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
@@ -28,7 +60,8 @@
         "ssr": {
           "entry": "apps/mathly/src/server.ts"
         },
-        "prerender": true
+        "prerender": true,
+        "outputMode": "server"
       },
       "configurations": {
         "production": {
@@ -54,15 +87,26 @@
       },
       "defaultConfiguration": "production"
     },
-    "serve": {
-      "continuous": true,
+    "serve-ssr": {
+      "executor": "@nx/node:execute",
+      "options": {
+        "buildTarget": "mathly:build",
+        "waitUntilTargets": ["mathly:build"],
+        "outputPath": "dist/apps/mathly",
+        "main": "dist/apps/mathly/server/main.js"
+      }
+    },
+    "serve-client": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "proxyConfig": "apps/mathly/proxy.conf.json"
+      },
       "configurations": {
-        "production": {
-          "buildTarget": "mathly:build:production"
-        },
         "development": {
-          "buildTarget": "mathly:build:development"
+          "buildTarget": "mathly:build-client:development"
+        },
+        "production": {
+          "buildTarget": "mathly:build-client:production"
         }
       },
       "defaultConfiguration": "development"
@@ -91,6 +135,13 @@
         "port": 4200,
         "staticFilePath": "dist/apps/mathly/browser",
         "spa": true
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["rm -rf dist/apps/mathly", "rm -rf node_modules/.cache"],
+        "parallel": false
       }
     }
   }

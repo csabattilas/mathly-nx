@@ -1,0 +1,25 @@
+<div>
+  @for(row of rows; track row; let index = $index) {
+    <div class="flex gap-1 justify-center w-full">
+      @for(number of row; track number) {
+        <button
+          type="button"
+          [class.mb-1]="index === 0"
+          class="bg-blue-500 rounded text-white text-3xl text-center p-3 flex justify-center items-center" (click)="onKeyClick(number)">
+          {{ number }}
+        </button>
+      }
+<!--        @if(index === 0) {-->
+<!--          <div class="bg-blue-500 rounded text-white font-bold text-center flex justify-center items-center" (click)="onKeyClick('ArrowLeft')">-->
+<!--            >-->
+<!--          </div>-->
+
+<!--        } @else {-->
+<!--          <div class="bg-blue-500 rounded text-white font-bold text-center flex justify-center items-center" (click)="onKeyClick('ArrowRight')">-->
+<!--            <-->
+<!--          </div>-->
+<!--        }-->
+    </div>
+  }
+</div>
+

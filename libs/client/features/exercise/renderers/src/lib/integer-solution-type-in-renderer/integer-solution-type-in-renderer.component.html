@@ -1,0 +1,56 @@
+@if (exercise.descriptor.length) {
+  <div
+    class="flex justify-center items-start gap-2"
+    [class.vertical-rendered]="exercise.rendererOptions?.verticalRendering"
+  >
+    @for (item of exercise.descriptor; track item.block) {
+      @if (
+        !(
+          item.isNotKnown ||
+          (item.isEqualSign && exercise.rendererOptions?.verticalRendering)
+        )
+      ) {
+        <span
+          class="text-3xl self-end"
+          [class.number]="
+            exercise.rendererOptions?.verticalRendering &&
+            !item.isOperand &&
+            !item.isEqualSign
+          "
+          [class.vertical-operand]="
+            exercise.rendererOptions?.verticalRendering && item.isOperand
+          "
+          >{{ item.block }}</span
+        >
+      } @else if (item.isNotKnown) {
+        <div
+          class="flex flex-row gap-0.5"
+          [class.vertical-solution]="
+            exercise.rendererOptions?.verticalRendering
+          "
+          [class.flex-row-reverse]="
+            typeInDirection() === typeInDirections.FromRight
+          "
+          [class.self-end]="exercise.rendererOptions?.verticalRendering"
+        >
+          @for (i of exercise.solution.split(''); track i; let index = $index) {
+            <div>
+              <input
+                [size]="1"
+                [ngModel]="solutionInput()[index]"
+                [style]="{ width: 20 + 'px' }"
+                class="p-0 border-b-2 border-black text-3xl bg-transparent block opacity-100"
+                [class.text-red-700]="correct()[index] === false"
+                [class.text-green-700]="correct()[index]"
+                [class.border-red-700]="correct()[index] === false"
+                [class.border-green-700]="correct()[index]"
+                (input)="slice($event)"
+                [disabled]="true"
+              />
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+}

@@ -1,0 +1,12 @@
+@switch (exerciseDifficulty) {
+  @case (ExerciseDifficulty.From0To20Crossing10) {
+    @defer {
+      <mathly-help-subtraction-from-0-to-20-crossing-10
+        [exercise]="exercise"
+      ></mathly-help-subtraction-from-0-to-20-crossing-10>
+    }
+  }
+  @default {
+    <mathly-help-generic />
+  }
+}

@@ -1,0 +1,24 @@
+:host {
+  width: 100%;
+  margin: 0 auto;
+  background: white;
+  display: block;
+}
+
+@keyframes draw {
+  to {
+    stroke-dasharray: 1000, 1000;
+  }
+}
+
+#greenArc {
+  animation: draw 1s linear forwards;
+}
+
+#arrowhead-green {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "repository",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/repository/src",
+  "projectType": "library",
+  "tags": ["scope:client", "type:util"]
+}

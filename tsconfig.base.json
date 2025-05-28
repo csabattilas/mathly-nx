@@ -8,13 +8,49 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2022",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@mathly-nx/additive-generators": [
+        "libs/client/features/generators/additive/src/index.ts"
+      ],
+      "@mathly-nx/api-config": ["libs/client/api-config/src/index.ts"],
+      "@mathly-nx/api-core-auth": ["libs/api/core/auth/src/index.ts"],
+      "@mathly-nx/api-user": ["libs/api/features/user/src/index.ts"],
+      "@mathly-nx/auth": ["libs/client/features/auth/src/index.ts"],
+      "@mathly-nx/dto": ["libs/shared/dto/src/index.ts"],
+      "@mathly-nx/exercise-additive": [
+        "libs/client/features/exercise/additive/src/index.ts"
+      ],
+      "@mathly-nx/exercise-config": [
+        "libs/client/features/exercise/config/src/index.ts"
+      ],
+      "@mathly-nx/exercise-domain": [
+        "libs/client/features/exercise/domain/src/index.ts"
+      ],
+      "@mathly-nx/exercise-factory": [
+        "libs/client/features/exercise/factory/src/index.ts"
+      ],
+      "@mathly-nx/exercise-renderers": [
+        "libs/client/features/exercise/renderers/src/index.ts"
+      ],
+      "@mathly-nx/exercise-ui": [
+        "libs/client/features/exercise/ui/src/index.ts"
+      ],
+      "@mathly-nx/gallery": ["libs/client/features/gallery/src/index.ts"],
+      "@mathly-nx/home": ["libs/client/features/home/src/index.ts"],
+      "@mathly-nx/landing": ["libs/client/features/landing/src/index.ts"],
+      "@mathly-nx/layout": ["libs/client/features/layout/src/index.ts"],
+      "@mathly-nx/repository": ["libs/client/repository/src/index.ts"],
+      "@mathly-nx/runner": ["libs/client/features/runner/src/index.ts"],
+      "@mathly-nx/ui": ["libs/client/ui/src/index.ts"],
+      "@mathly-nx/user": ["libs/client/features/user/src/index.ts"],
+      "@mathly-nx/utils": ["libs/client/utils/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

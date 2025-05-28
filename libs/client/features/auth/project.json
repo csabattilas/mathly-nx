@@ -1,0 +1,8 @@
+{
+  "name": "auth",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/features/auth/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:client", "type:feature"]
+}

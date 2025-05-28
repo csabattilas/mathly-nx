@@ -1,0 +1,19 @@
+.vertical-rendered {
+  @apply flex-col;
+  .number {
+    letter-spacing: 2px;
+    &:last-child {
+      border-bottom: 2px solid;
+    }
+  }
+}
+
+.vertical-operand {
+  position: absolute;
+  right: -25px;
+  margin-top: -9px;
+}
+
+.vertical-solution {
+  padding-top: 4px;
+}
